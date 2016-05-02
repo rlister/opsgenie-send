@@ -48,7 +48,7 @@ Opsgenie::Send.heartbeat('Test heartbeat')
 Opsgenie::Send.alert('Test alert')
 ```
 
-The methods return the response from Opsgenie as a hash.
+The methods return the JSON string response from Opsgenie.
 
 You may pass optional parameters to alerts (see the list at
 https://www.opsgenie.com/docs/web-api/alert-api#createAlertRequest):
