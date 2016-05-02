@@ -36,7 +36,8 @@ export OPSGENIE_KEY=xxx
 Run from the command-line:
 
 ```
-
+opsgenie-alert Test alert
+opsgenie-heartbeat Test heartbeat
 ```
 
 Run from your code:
