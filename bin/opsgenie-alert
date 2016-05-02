@@ -1,0 +1,32 @@
+#!/usr/bin/ruby
+#-*- mode: ruby; -*-
+
+require 'opsgenie/send'
+require 'optparse'
+
+## options from https://www.opsgenie.com/docs/web-api/alert-api#createAlertRequest
+option_names = %w[
+  teams
+  alias
+  description
+  recipients
+  actions
+  source
+  tags
+  details
+  entity
+  user
+  note
+]
+
+options = {}
+
+OptionParser.new do |opts|
+  option_names.each do |name|
+    opts.on("--#{name} VALUE", "Optional parameter #{name}") do |arg|
+      options[name] = arg
+    end
+  end
+end.parse!
+
+puts Opsgenie::Send.alert(ARGV.join(' '), options)

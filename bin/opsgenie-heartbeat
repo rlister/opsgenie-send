@@ -1,0 +1,5 @@
+#!/usr/bin/ruby
+#-*- mode: ruby; -*-
+
+require 'opsgenie/send'
+puts Opsgenie::Send.heartbeat(ARGV.join(' '))
