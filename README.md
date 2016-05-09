@@ -57,6 +57,13 @@ https://www.opsgenie.com/docs/web-api/alert-api#createAlertRequest):
 Opsgenie::Send.alert('Test alert', tags: %w[foo bar])
 ```
 
+You can send, and then close an alert by using an alias:
+
+```ruby
+Opsgenie::Send.alert('Test alert', alias: 'test')
+Opsgenie::Send.close(alias: 'test')
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install

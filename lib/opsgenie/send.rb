@@ -19,5 +19,10 @@ module Opsgenie
     def self.alert(message, options = {})
       Opsgenie::Send.post('alert', {message: message}.merge(options))
     end
+
+    ## need to pass either id or alias option
+    def self.close(options = {})
+      Opsgenie::Send.post('alert/close', options)
+    end
   end
 end
