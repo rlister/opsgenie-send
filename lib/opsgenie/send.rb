@@ -15,7 +15,7 @@ module Opsgenie
     end
 
     ## see options at https://docs.opsgenie.com/docs/alert-api#get-alert
-    def self.alerts(message, options = {})
+    def self.alert(message, options = {})
       Opsgenie::Send.post('alerts', {message: message}.merge(options))
     end
 
