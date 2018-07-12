@@ -4,9 +4,8 @@ require 'net/https'
 module Opsgenie
   module Send
     def self.post(action, params)
-      data = params
       request = Net::HTTP::Post.new("/v2/#{action}", 'Content-Type' =>'application/json', 'Authorization' => "GenieKey #{ ENV['OPSGENIE_KEY']}")
-      request.body = data.to_json
+      request.body = params.to_json
       response = Net::HTTP.new('api.opsgenie.com').request(request)
       response.body
     end
