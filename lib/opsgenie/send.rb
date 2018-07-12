@@ -4,25 +4,25 @@ require 'net/https'
 module Opsgenie
   module Send
     def self.post(action, params)
-      data = {'apiKey' => ENV['OPSGENIE_KEY']}.merge(params)
-      request = Net::HTTP::Post.new("/v1/json/#{action}", 'Content-Type' =>'application/json')
+      data = params
+      request = Net::HTTP::Post.new("/v2/#{action}", 'Content-Type' =>'application/json', 'Authorization' => "GenieKey #{ ENV['OPSGENIE_KEY']}")
       request.body = data.to_json
       response = Net::HTTP.new('api.opsgenie.com').request(request)
       response.body
     end
 
     def self.heartbeat(name, options = {})
-      Opsgenie::Send.post('heartbeat/send', {name: name}.merge(options))
+      Opsgenie::Send.post("heartbeats/#{name}/ping", options)
     end
 
-    ## see options at https://www.opsgenie.com/docs/web-api/alert-api#createAlertRequest
-    def self.alert(message, options = {})
-      Opsgenie::Send.post('alert', {message: message}.merge(options))
+    ## see options at https://docs.opsgenie.com/docs/alert-api#get-alert
+    def self.alerts(message, options = {})
+      Opsgenie::Send.post('alerts', {message: message}.merge(options))
     end
 
     ## need to pass either id or alias option
-    def self.close(options = {})
-      Opsgenie::Send.post('alert/close', options)
+    def self.close(id, options = {})
+      Opsgenie::Send.post("alerts/#{id}/close", options)
     end
   end
 end
